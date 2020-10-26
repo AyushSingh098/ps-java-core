@@ -1,3 +1,1 @@
-this is a sample file
-this has some content inside it
-please use this for java core course
+22 is my age

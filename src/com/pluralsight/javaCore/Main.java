@@ -4,12 +4,25 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Formatter;
 
 public class Main {
 
     public static void main(String[] args) {
-        //bufferedReaderImpl();
-        javaNIOImpl();
+//        writingUsingFormatter();
+//        javaNIOImpl();
+        if (args.length >= 1) {
+            try {
+                System.out.println("Running From Command Line");
+                readFileCommandLine(args[0]);
+            }
+            catch (IOException e){
+                System.out.println(e.getClass().getSimpleName());
+
+        }
+
+
+    }
     }
 
     //try-with-resource
@@ -73,6 +86,30 @@ public class Main {
             System.out.println(e.getClass().getSimpleName());
         }
 
+    }
+
+    //using formatter
+    public static void writingUsingFormatter(){
+
+        try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("file1.txt"));
+            Formatter f = new Formatter(writer)){
+            f.format("%d is my age", 22);
+        }
+        catch (IOException e){
+            System.out.println(e.getClass().getSimpleName());
+        }
+
+    }
+
+    //commandline
+    public static void readFileCommandLine(String filename) throws IOException{
+        String inputLine;
+        try(BufferedReader reader = Files.newBufferedReader(Paths.get("file1.txt"))){
+            while((inputLine = reader.readLine())!= null){
+                System.out.println(inputLine);
+
+            }
+        }
     }
 
 }
